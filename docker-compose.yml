@@ -1,0 +1,55 @@
+version: '3'
+
+services:
+  mysqlcrud2:
+    image: mysql:latest
+    container_name: mysqlcrud2
+    # volumes:
+    #   - mysqlcrud2-data:/var/lib/mysql/data
+    ports:
+      - 3306:3306
+#    restart: always
+    environment:
+      MYSQL_DATABASE: clientedb
+      # MYSQL_USER: root
+      # MYSQL_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: root
+      
+  practica-cliente:
+    image: backcrudcliente3
+    container_name: practica-cliente
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysqlcrud2:3306/clientedb?createDatabaseIfNotExist=true
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_JPA_SHOW_SQL=true
+      # - SPRING_DATASOURCE_DRIVER_CLASS_NAME=com.mysql.cj.jdbc.Driver
+      # - SPRING_JPA_DATABASE_PLATFORM=org.hibernate.dialect.MySQL8Dialect
+    ports:
+      - 8086:8086
+    build:
+      context: ./practica-cliente
+      dockerfile: Dockerfile
+    depends_on:
+      - mysqlcrud2
+
+#Fron-end Angular Application
+  taller-angular:
+    build: 
+      context: ./taller-angular
+      dockerfile: Dockerfile
+    container_name: taller-angular
+    ports:
+      - 4200:80
+    links:
+      - practica-cliente
+
+#Volumes for DB data
+volumes:
+  mysqlcrud2-data:
+
+
+
+
+

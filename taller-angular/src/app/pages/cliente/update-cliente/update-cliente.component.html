@@ -1,0 +1,48 @@
+<mat-card>
+    <h1>Actualizar Cliente</h1>
+    <mat-card-content>
+        <div class="bootstrap-wrapper">
+            <div class="row">
+                <div class="col-md-4 offset-md-2">
+                    <form *ngIf= "cliente" (submit)= "actualizarCliente()">
+                        <mat-form-field class="w100" appearance="fill">
+                            <mat-label>Nombre</mat-label>
+                            <input [(ngModel)]= "cliente.nombre"
+                            type="text" name="nombre" 
+                            placeholder="Digite el nombre" 
+                            required matInput>
+                        </mat-form-field>
+                        <mat-form-field class="w100" appearance="fill">
+                            <mat-label>Direccion</mat-label>
+                            <input [(ngModel)]= "cliente.direccion"
+                            type="text" name="direccion" 
+                            placeholder="Digite la direccion" 
+                            required matInput >
+                        </mat-form-field>
+                        <mat-form-field class="w100" appearance="fill">
+                            <mat-label>Email</mat-label>
+                            <input [(ngModel)]= "cliente.email"
+                            type="email" name="email" 
+                            placeholder="Digite el email" 
+                            required matInput>
+                        </mat-form-field><mat-form-field class="w100" appearance="fill">
+                            <mat-label>Fecha</mat-label>
+                            <input [(ngModel)]= "cliente.fecha"
+                            type="date" name="fecha" 
+                            placeholder="Digite el fecha" 
+                            required matInput>
+                        </mat-form-field>
+
+                    <div class="container text-center">
+                        <button mat-raised-button color="primary">Actualizar</button>
+                    </div>
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>
+
+<!-- {{ examenData | json }} -->
